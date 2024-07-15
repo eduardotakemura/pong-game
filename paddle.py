@@ -28,14 +28,37 @@ class Paddle:
                 seg.goto(seg.xcor(),seg.ycor()-20)
 
     def check_hit(self,ball):
-        for seg in self.paddle_list:
+        for pos, seg in enumerate(self.paddle_list):
+            # Check if there was a collision #
             if seg.distance(ball) < 25 and (ball.xcor() < 350 or ball.xcor() > 350):
-                if ball.heading() == 60:
-                    ball.setheading(120)
-                elif ball.heading() == 120:
-                    ball.setheading(60)
-                elif ball.heading() == -60:
-                    ball.setheading(-120)
-                elif ball.heading() == -120:
-                    ball.setheading(-60)
+                # Check seg hit #
+                if pos == 0:
+                    if 90 < ball.heading() < 270:
+                        ball.setheading(300)
+                    else:
+                        ball.setheading(240)
+                elif pos == 1:
+                    if 90 < ball.heading() < 270:
+                        ball.setheading(315)
+                    else:
+                        ball.setheading(225)
+                elif pos == 3:
+                    if 90 < ball.heading() < 270:
+                        ball.setheading(45)
+                    else:
+                        ball.setheading(135)
+                elif pos == 4:
+                    if 90 < ball.heading() < 270:
+                        ball.setheading(60)
+                    else:
+                        ball.setheading(120)
+                else:
+                    if 0 < ball.heading() < 90:
+                        ball.setheading(300)
+                    elif 90 < ball.heading() < 180:
+                        ball.setheading(240)
+                    elif 180 < ball.heading() < 270:
+                        ball.setheading(120)
+                    else:
+                        ball.setheading(60)
                 return True

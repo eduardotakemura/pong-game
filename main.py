@@ -40,9 +40,11 @@ while game_on:
 
     ## Checking hit with paddle ##
     if left_pad.check_hit(ball):
+        ball.move()
         ball_speed *= 0.9
     elif right_pad.check_hit(ball):
         ball_speed *= 0.9
+        ball.move()
 
     ## Checking a score point ##
     elif ball.xcor() > 400:
@@ -52,6 +54,7 @@ while game_on:
         scoreboard.left_score += 1
         scoreboard.restart_game()
         ball_speed = initial_speed
+
     elif ball.xcor() < -400:
         ball.restart_game()
         left_pad.game_restart(left_coord)
@@ -63,6 +66,7 @@ while game_on:
     ## Checking hit with wall ##
     elif ball.ycor() > 280 or ball.ycor() < -280:
         ball.setheading(-ball.heading())
+        ball.move()
 
 
 screen.exitonclick()
